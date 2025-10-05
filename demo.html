@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassMate AI - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .demo-section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .demo-button:hover {
+            background: #5a6fd8;
+        }
+        
+        .demo-output {
+            background: #f1f3f4;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .status {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .architecture {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .architecture h4 {
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+        
+        .architecture ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .architecture li {
+            padding: 0.25rem 0;
+            color: #6c757d;
+        }
+        
+        .architecture li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 ClassMate AI</h1>
+            <p>K-12 Education Platform with AI-powered Lesson Generation</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🚀 Application Status</h2>
+            <div class="status success">
+                <strong>✅ Development Environment Ready!</strong><br>
+                The application is set up with mock AI services for demonstration purposes.
+            </div>
+            <div class="status info">
+                <strong>ℹ️ Mock Services Active</strong><br>
+                AI features are running with mock data since no real API keys are configured.
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🤖 AI Features Demo</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📚 Lesson Generation</h3>
+                    <p>Generate comprehensive lesson plans from educational materials using AI.</p>
+                    <button class="demo-button" onclick="generateLesson()">Generate Sample Lesson</button>
+                    <div id="lesson-output" class="demo-output" style="display: none;"></div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📝 Quiz Creation</h3>
+                    <p>Automatically create engaging quizzes with various question types.</p>
+                    <button class="demo-button" onclick="generateQuiz()">Generate Sample Quiz</button>
+                    <div id="quiz-output" class="demo-output" style="display: none;"></div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🔍 Content Search</h3>
+                    <p>Intelligent search through educational materials using RAG technology.</p>
+                    <button class="demo-button" onclick="searchContent()">Search Sample Content</button>
+                    <div id="search-output" class="demo-output" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🏗️ Architecture Overview</h2>
+            <div class="architecture">
+                <h4>Frontend (Next.js)</h4>
+                <ul>
+                    <li>React with TypeScript</li>
+                    <li>Tailwind CSS + shadcn/ui components</li>
+                    <li>TanStack Query for state management</li>
+                    <li>Clerk for authentication</li>
+                </ul>
+                
+                <h4>Backend (NestJS)</h4>
+                <ul>
+                    <li>TypeScript with Prisma ORM</li>
+                    <li>PostgreSQL with pgvector for RAG</li>
+                    <li>Redis for caching and queues</li>
+                    <li>BullMQ for background processing</li>
+                </ul>
+                
+                <h4>AI/ML Layer</h4>
+                <ul>
+                    <li>OpenAI GPT-4 for lesson generation</li>
+                    <li>Anthropic Claude for content analysis</li>
+                    <li>pgvector for semantic search</li>
+                    <li>Mock services for development</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🔧 Development Setup</h2>
+            <p>To run the full application with real AI services:</p>
+            <div class="architecture">
+                <h4>Required Environment Variables:</h4>
+                <ul>
+                    <li>OPENAI_API_KEY - For GPT-4 lesson generation</li>
+                    <li>ANTHROPIC_API_KEY - For Claude content analysis</li>
+                    <li>AWS credentials - For file storage</li>
+                    <li>CLERK_SECRET_KEY - For authentication</li>
+                </ul>
+                
+                <h4>Services Running:</h4>
+                <ul>
+                    <li>PostgreSQL with pgvector extension</li>
+                    <li>Redis for caching and queues</li>
+                    <li>Mock AI services (current demo)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateLesson() {
+            const output = document.getElementById('lesson-output');
+            output.style.display = 'block';
+            output.textContent = '🎭 Mock AI: Generating lesson...';
+            
+            setTimeout(() => {
+                const mockLesson = {
+                    title: "Lesson: Mathematics for Grade 5",
+                    objectives: [
+                        "Students will understand basic algebraic concepts",
+                        "Students will be able to solve simple equations",
+                        "Students will develop problem-solving skills"
+                    ],
+                    activities: [
+                        {
+                            type: "Introduction",
+                            duration: 10,
+                            description: "Begin with an engaging math problem"
+                        },
+                        {
+                            type: "Main Activity", 
+                            duration: 25,
+                            description: "Interactive lesson covering algebraic concepts"
+                        },
+                        {
+                            type: "Conclusion",
+                            duration: 10,
+                            description: "Review and summarize key learning points"
+                        }
+                    ],
+                    materials: [
+                        "Whiteboard or presentation screen",
+                        "Math worksheets",
+                        "Interactive examples"
+                    ],
+                    assessment: "Quick quiz to check understanding of algebra"
+                };
+                
+                output.textContent = JSON.stringify(mockLesson, null, 2);
+            }, 1000);
+        }
+        
+        function generateQuiz() {
+            const output = document.getElementById('quiz-output');
+            output.style.display = 'block';
+            output.textContent = '🎭 Mock AI: Generating quiz...';
+            
+            setTimeout(() => {
+                const mockQuiz = [
+                    {
+                        id: '1',
+                        type: 'MULTIPLE_CHOICE',
+                        question: 'What is 2x + 3 = 7?',
+                        options: [
+                            'x = 2',
+                            'x = 3', 
+                            'x = 4',
+                            'x = 5'
+                        ],
+                        correctAnswer: 'x = 2',
+                        points: 10
+                    },
+                    {
+                        id: '2',
+                        type: 'TRUE_FALSE',
+                        question: 'Algebra is important for problem-solving.',
+                        correctAnswer: 'true',
+                        points: 5
+                    },
+                    {
+                        id: '3',
+                        type: 'SHORT_ANSWER',
+                        question: 'Explain how algebra helps in real life.',
+                        correctAnswer: 'Student responses will vary',
+                        points: 15
+                    }
+                ];
+                
+                output.textContent = JSON.stringify(mockQuiz, null, 2);
+            }, 800);
+        }
+        
+        function searchContent() {
+            const output = document.getElementById('search-output');
+            output.style.display = 'block';
+            output.textContent = '🎭 Mock AI: Searching content...';
+            
+            setTimeout(() => {
+                const mockSearch = {
+                    query: "algebraic equations",
+                    results: [
+                        {
+                            id: '1',
+                            content: "Algebraic equations are mathematical statements...",
+                            materialTitle: "Introduction to Algebra",
+                            similarity: 0.95
+                        },
+                        {
+                            id: '2', 
+                            content: "Solving equations involves finding the value...",
+                            materialTitle: "Equation Solving Techniques",
+                            similarity: 0.87
+                        }
+                    ],
+                    answer: "Based on the search results, algebraic equations are mathematical statements that show the relationship between variables and constants. They are solved by finding the values that make the equation true."
+                };
+                
+                output.textContent = JSON.stringify(mockSearch, null, 2);
+            }, 600);
+        }
+    </script>
+</body>
+</html>
